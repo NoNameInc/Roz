@@ -38,7 +38,6 @@ public:
 	void SetLength(int length) { this->length = length; }
 	void SetMaxScore(int maxScore) { this->maxScore = maxScore; }
 	void DisFinal() { cout << lengthFinal / deaths << endl; }
-	int DisFinal2() { return lengthFinal / deaths; }
 	double GetDeath() { return deaths; }
 };
 

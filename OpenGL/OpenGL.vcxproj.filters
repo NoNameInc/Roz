@@ -24,14 +24,14 @@
     <ClInclude Include="fgClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NN.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Classes.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="matr.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AI.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -47,7 +47,7 @@
     <ClCompile Include="matr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AI.cpp">
+    <ClCompile Include="NN.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

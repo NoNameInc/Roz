@@ -13,7 +13,48 @@
 using namespace std;
 
 // Коефіцієнт навчання 
-double lr = 0.1;
+double lr = 1;
+
+int maint() {
+	vector<unsigned> topology = { 9, 18, 1 };
+	Net net(topology);
+
+	//net.loadWeight("weight.txt");
+
+	string path = "trainingSet2.txt";
+	ifstream f; f.open(path);
+
+	vector<double> inputs(9);
+	vector<double> targetVals(1);
+
+	int amount_of_epoch = 300;
+	int amount_of_situations = 512;
+
+	int counter = 0; int i = 0;
+	do {
+		for (int i = 0; i < amount_of_situations; i++) {
+			//f >> inputs[0] >> inputs[1] >> inputs[2] >> inputs[3] >> inputs[4] >> inputs[5] >> inputs[6] >> inputs[7] >> inputs[8] >> targetVals[0];
+			for (int i = 0; i < inputs.size(); i++) {
+				f >> inputs[i];
+			}
+			for (int i = 0; i < targetVals.size(); i++) {
+				f >> targetVals[i];
+			}
+
+			net.feedForward(inputs);
+			net.backProp(targetVals);
+
+			net.getResult(inputs, targetVals);
+		}
+		f.seekg(0, ios::beg);
+
+		i++;
+	} while (i < amount_of_epoch);
+
+	f.close();
+	system("pause");
+	return 0;
+}
 
 // Class Net
 Net::Net(const vector<unsigned> &topology) {
@@ -39,6 +80,11 @@ void Net::getResult(const vector<double> &inputs, const vector<double> &targetVa
 	cout << "Net result: ";
 	for (int i = 0; i < Layers.back().size() - 1; i++) {
 		cout << Layers.back()[i].getVal() << " ";
+		if (Layers.back()[i].getVal() > 0.04 && Layers.back()[i].getVal() < 0.20)      cout << "right";
+		else if (Layers.back()[i].getVal() > 0.20 && Layers.back()[i].getVal() < 0.55) cout << "left";
+		else if (Layers.back()[i].getVal() > 0.55 && Layers.back()[i].getVal() < 0.75) cout << "up";
+		else if (Layers.back()[i].getVal() > 0.75 && Layers.back()[i].getVal() < 1)    cout << "down";
+		else cout << "do whatever you want!!";
 	}
 	cout << endl << endl;
 }
