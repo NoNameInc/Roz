@@ -63,7 +63,7 @@ void Object::VectorH(int xvector, int yvector) {
 	this->yvector = yvector;
 }
 
-void Object::Snake(SDL_Renderer *renderer, int r, int g, int b) {
+void Object::Snake(SDL_Renderer *renderer, int r, int g, int b, int trans) {
 	mas.resize((length+1)*2);
 	for (int i = (length-1)*2; i >= 0; i -= 2) {
 		/*if (i > 3)
@@ -80,7 +80,7 @@ void Object::Snake(SDL_Renderer *renderer, int r, int g, int b) {
 		}
 	}
 	//Sensors
-	Dis(renderer, r, g, b, 255);
+	Dis(renderer, r, g, b, trans);
 
 	/*Rendering(renderer, 0, 255, 0, mas[0] + 10, mas[1], 128);
 	Rendering(renderer, 0, 255, 0, mas[0] - 10, mas[1], 128);

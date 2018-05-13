@@ -19,7 +19,7 @@ private:
 	int maxScore = 1;
 public:
 	Object(int start, int end, int WinHight, int length);
-	void Snake(SDL_Renderer *renderer, int r, int g, int b);
+	void Snake(SDL_Renderer *renderer, int r, int g, int b, int trans);
 	void Dis(SDL_Renderer *renderer, int r, int g, int b, int trans);
 	void Rendering(SDL_Renderer *renderer, int r, int g, int b, int xp, int yp, int trans);
 	void VectorH(int xvector, int yvector); 
