@@ -8,7 +8,7 @@ using namespace std;
 
 void Object::Dis(SDL_Renderer *renderer, int r, int g, int b, int trans) {
 	for (int i = (length - 1) * 2; i >= 0; i -= 2) {
-		Rendering(renderer, r, g, b, mas[i], mas[i + 1], trans);
+		Rendering(renderer, i * 5 + 100 < r ? i * 5 + 100 : r, g, b, mas[i], mas[i + 1], trans);
 	}
 }
 
@@ -19,7 +19,7 @@ bool Object::VecCollision(vector<int> issuePrime, int start, int end, int WinHig
 			deaths++;
 			lengthFinal += length;
 			length = 1;
-			mas[0] = ((rand() % ((end - start - 1) / 10)) + 1 + start / 10) * 10;
+			mas[0] = ((rand() % ((end - start - 1) / 10)) + 1 + (start) / 10) * 10;
 			mas[1] = ((rand() % (WinHight / 10 - 2)) + 1) * 10;
 			return false;
 		}
@@ -52,7 +52,7 @@ bool Object::VecCollision(vector<int> issuePrime, int start, int end, int WinHig
 }
 
 void Object::Rendering(SDL_Renderer *renderer, int r, int g, int b, int xp, int yp, int trans) {
-	SDL_Rect fillRect = { xp, yp, 10, 10 };
+	SDL_Rect fillRect = { xp, yp, 10, 10};
 	SDL_SetRenderDrawColor(renderer, r, g, b, trans);
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 	SDL_RenderFillRect(renderer, &fillRect);

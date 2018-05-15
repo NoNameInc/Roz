@@ -26,10 +26,10 @@ int ShowMenu(SDL_Window* window) {
 	int i = 0, x, y;
 	Uint32 time;
 	/*-----------Äàí³ ïîë³â----------------*/
-	const int NUM = 8;
-	const char* pole[NUM] = { "Select a mode", "No Name Inc.", "mode1", "mode2", "mode3", "mode4", "Records", "Exit" };
+	const int NUM = 6; // ê³ëüê³ñòü îáºêò³â ó â³êí³
+	const char* pole[NUM] = { "Select mode", "No Name Inc.", "Basic", "Duel", "Moving wall", "Exit" }; // îáýêòè ó â³êí³
 	SDL_Surface* menu[NUM];
-	bool sel[NUM] = {0,0,0,0,0,0,0,0};
+	bool sel[NUM] = {0,0,0,0,0,0};
 	SDL_Color color[2] = { {0,0,0},{255,0,0} };
 
 	menu[0] = TTF_RenderText_Solid(font1, pole[0], color[0]);
@@ -43,20 +43,22 @@ int ShowMenu(SDL_Window* window) {
 	 
 	SDL_Rect koord[NUM];
 	koord[0].x = surface->clip_rect.w / 2 - menu[0]->clip_rect.w / 2;
-	koord[0].y = 50;
+	koord[0].y = 130;
 	koord[1].x = surface->clip_rect.w - menu[1]->clip_rect.w -20;
 	koord[1].y = surface->clip_rect.h - menu[1]->clip_rect.h - 20;
+	koord[2].x = surface->clip_rect.w / 2 + menu[0]->clip_rect.w / 2 - menu[2]->clip_rect.w;
+	koord[2].y = 180;
 	int a = 50;
-	for (i = 2; i < NUM - 2; i++) {
-		koord[i].x = surface->clip_rect.w / 2 + menu[0]->clip_rect.w / 2 - menu[i]->clip_rect.w;
-		koord[i].y = 50 + a;
+	for (i = 3; i < NUM - 1; i++) {
+		koord[i].x = koord[2].x;
+		koord[i].y = 180 + a;
 		koord[i].w = koord[i].y + 25;
 			a += 50;
 	}
 	for (; i < NUM; i++)
 	{
 		koord[i].x = surface->clip_rect.w / 2 - menu[0]->clip_rect.w / 2;
-		koord[i].y = 50 + a;
+		koord[i].y = 180 + a;
 		koord[i].w = koord[i].y + 25;
 		a += 50;
 	}
@@ -90,7 +92,7 @@ int ShowMenu(SDL_Window* window) {
 							sel[i] = 0;
 							SDL_FreeSurface(menu[i]);
 							menu[i] = TTF_RenderText_Solid(font, pole[i], color[0]);
-							if (x >= koord[i].x && x <= koord[i].x + koord[i].w && y >= koord[i].y && y <= koord[i].y + koord[i].w)
+							if (x >= koord[i].x && x <= koord[i].x + koord[i].w && y >= koord[i].y && y <= koord[i].y + 50)
 							{
 								if (sel[i] == 0)
 								{
@@ -106,15 +108,12 @@ int ShowMenu(SDL_Window* window) {
 					case SDL_MOUSEBUTTONDOWN: 
 						x = event.motion.x;
 						y = event.motion.y;
-						if (x >= koord[NUM - 1].x && x <= koord[NUM - 1].x + koord[NUM - 1].w && y >= koord[NUM - 1].y && y <= koord[NUM - 1].y + koord[NUM - 1].w)
+						if (x >= koord[NUM - 1].x && x <= koord[NUM - 1].x + koord[NUM - 1].w && y >= koord[NUM - 1].y && y <= koord[NUM - 1].y + 50)
 						{
 							return 0;
 						}
-						if (x >= koord[NUM - 2].x && x <= koord[NUM - 2].x + koord[NUM - 2].w && y >= koord[NUM - 2].y && y <= koord[NUM - 2].y + koord[NUM - 2].w) {
-							return 60;
-						}
-						for (i = 2; i < NUM - 2; i++) {
-							if (x >= koord[i].x && x <= koord[i].x + koord[i].w && y >= koord[i].y && y <= koord[i].y + koord[i].w)
+						for (i = 2; i < NUM - 1; i++) {
+							if (x >= koord[i].x && x <= koord[i].x + koord[i].w && y >= koord[i].y && y <= koord[i].y + 50)
 							{
 								int j = level(window);
 								if(j != 0)
@@ -157,20 +156,22 @@ int level(SDL_Window* window) {
 
 	SDL_Rect koord[NUM];
 	koord[0].x = surface->clip_rect.w / 2 - menu[0]->clip_rect.w / 2;
-	koord[0].y = 50;
+	koord[0].y = 130;
 	koord[1].x = surface->clip_rect.w - menu[1]->clip_rect.w - 20;
 	koord[1].y = surface->clip_rect.h - menu[1]->clip_rect.h - 20;
+	koord[2].x = surface->clip_rect.w / 2 + menu[0]->clip_rect.w / 2 - menu[2]->clip_rect.w;
+	koord[2].y = 180;
 	int a = 50;
-	for (i = 2; i < NUM - 1; i++) {
-		koord[i].x = surface->clip_rect.w / 2 + menu[0]->clip_rect.w / 2 - menu[i]->clip_rect.w;
-		koord[i].y = 50 + a;
+	for (i = 3; i < NUM - 1; i++) {
+		koord[i].x = koord[2].x;
+		koord[i].y = 180 + a;
 		koord[i].w = koord[i].y + 25;
 		a += 50;
 	}
 	for (; i < NUM; i++)
 	{
 		koord[i].x = surface->clip_rect.w / 2 - menu[0]->clip_rect.w / 2;
-		koord[i].y = 50 + a;
+		koord[i].y = 180 + a;
 		koord[i].w = koord[i].y + 25;
 		a += 50;
 	}
@@ -195,7 +196,7 @@ int level(SDL_Window* window) {
 					sel[i] = 0;
 					SDL_FreeSurface(menu[i]);
 					menu[i] = TTF_RenderText_Solid(font, pole[i], color[0]);
-					if (x >= koord[i].x && x <= koord[i].x + koord[i].w && y >= koord[i].y && y <= koord[i].y + koord[i].w)
+					if (x >= koord[i].x && x <= koord[i].x + koord[i].w && y >= koord[i].y && y <= koord[i].y + 50)
 					{
 						if (sel[i] == 0)
 						{
@@ -210,13 +211,13 @@ int level(SDL_Window* window) {
 			case SDL_MOUSEBUTTONDOWN:
 				x = event.motion.x;
 				y = event.motion.y;
-				if (x >= koord[NUM - 1].x && x <= koord[NUM - 1].x + koord[NUM - 1].w && y >= koord[NUM - 1].y && y <= koord[NUM - 1].y + koord[NUM - 1].w)
+				if (x >= koord[NUM - 1].x && x <= koord[NUM - 1].x + koord[NUM - 1].w && y >= koord[NUM - 1].y && y <= koord[NUM - 1].y + 50)
 				{
 					SDL_FillRect(surface, &surface->clip_rect, SDL_MapRGB(surface->format, 0xff, 0xff, 0xff));
 					return 0;
 				}
 				for (i = 2; i < NUM - 1; i++) {
-					if (x >= koord[i].x && x <= koord[i].x + koord[i].w && y >= koord[i].y && y <= koord[i].y + koord[i].w)
+					if (x >= koord[i].x && x <= koord[i].x + koord[i].w && y >= koord[i].y && y <= koord[i].y + 50)
 					{
 						SDL_FillRect(surface, &surface->clip_rect, SDL_MapRGB(surface->format, 0xff, 0xff, 0xff));
 						return i;
@@ -233,5 +234,28 @@ int level(SDL_Window* window) {
 			}
 			SDL_UpdateWindowSurface(window);
 		}
+	}
+}
+
+void winner(SDL_Window* window,int win) {
+	SDL_Surface* surface = SDL_GetWindowSurface(window);
+	TTF_Font* font = TTF_OpenFont("arial.ttf", 50);
+	const int NUM = 2;
+	const char* pole[NUM] = { "You Win!!!", "Bot Win" };
+	SDL_Surface* winn[NUM];
+	SDL_Rect koord[NUM];
+	switch (win) {
+	case 1: {
+		winn[0] = TTF_RenderText_Solid(font, pole[0], { 0,0,0 });
+		koord[0].x = surface->clip_rect.w / 2 - winn[0]->clip_rect.w / 2;
+		koord[0].y = surface->clip_rect.h / 2 - winn[0]->clip_rect.h / 2;
+		SDL_UpdateWindowSurface(window);
+	}
+	case 2: {
+		winn[1] = TTF_RenderText_Solid(font, pole[1], { 0,0,0 });
+		koord[1].x = surface->clip_rect.w / 2 - winn[1]->clip_rect.w / 2;
+		koord[1].y = surface->clip_rect.h / 2 - winn[1]->clip_rect.h / 2;
+			SDL_UpdateWindowSurface(window);
+	}
 	}
 }

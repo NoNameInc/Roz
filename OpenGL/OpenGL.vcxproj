@@ -155,6 +155,7 @@
   <ItemGroup>
     <ClInclude Include="Classes.h" />
     <ClInclude Include="matr.h" />
+    <ClInclude Include="Modes.h" />
     <ClInclude Include="NN.h" />
     <ClInclude Include="sdl_menu.h" />
     <ClInclude Include="stdafx.h" />
@@ -164,6 +165,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Classes.cpp" />
     <ClCompile Include="matr.cpp" />
+    <ClCompile Include="Modes.cpp" />
     <ClCompile Include="NN.cpp" />
     <ClCompile Include="sdl_menu.cpp" />
     <ClCompile Include="stdafx.cpp">

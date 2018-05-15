@@ -50,7 +50,7 @@ void Net::feed_forward(const vector<double> &input_values) {
 void Net::back_propagation(const vector<double>& target_values) {
 	for (int i = 0; i < target_values.size(); i++) {
 		structure.back()[i].gradient = (target_values[i] - structure.back()[i].value) *
-			Neuron::derivative_of_act_func(structure.back()[i].sum);
+											Neuron::derivative_of_act_func(structure.back()[i].sum);
 	}
 
 	for (int i = structure.size() - 1; i > 0; i--) {
